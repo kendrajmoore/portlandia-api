@@ -6,7 +6,7 @@ const Character = require("../models/character.js");
 router.get("/", (req, res) => {
     Character.find({})
         .then(character => {
-            res.render("posts/index.hbs", { character });
+            res.send("index route", { character });
         })
         .catch(err => {
             console.log(err.message);
@@ -15,57 +15,52 @@ router.get("/", (req, res) => {
 
 //new
 router.get("/new", (req, res) => {
-    res.render("posts/new.hbs");
+    res.send("character new");
 });
 
-//create
 // CREATE
-  app.post('/', (req, res) => {
+router.post("/", (req, res) => {
     // INSTANTIATE INSTANCE OF POST MODEL
-    var post = new Post(req.body);
+    let character = new Character(req.body);
 
     // SAVE INSTANCE OF POST MODEL TO DB
-    post.save((err, post) => {
-      // REDIRECT TO THE ROOT
-      return res.redirect(`/`);
-    })
-  });
-
-};
+    character.save((err, character) => {
+        // REDIRECT TO THE ROOT
+        return res.redirect(`/character`);
+    });
+});
 //show
 router.get("/:id", (req, res) => {
-    const currentUser = req.user;
-    Post.findById(req.params.id)
-        .populate("comments")
-        .then(post => {
-            res.render("posts/show.hbs", {
-                post: post,
-                currentUser: currentUser
-            }).catch(err => {
-                console.log(err.message);
-            });
+    Character.findById(req.params.id, (err, character) => {
+        res.send("show page", {
+            character
+        }).catch(err => {
+            console.log(err.message);
         });
+    });
 });
 
 //Edit
-router.get("/:id/edit", (req, res) => {
-    Post.findById(req.params.id, (err, post) => {
-        res.render("posts/edit.hbs", {
-            post: post
+router.get("/:id", (req, res) => {
+    Character.findById(req.params.id, (err, character) => {
+        res.send("edit get route", {
+            character
+        }).catch(err => {
+            console.log(err.message);
         });
     });
 });
 
 router.put("/:id", (req, res) => {
-    Post.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
+    Character.findByIdAndUpdate(req.params.id, req.body, (err, character) => {
         console.log(err);
-        res.redirect("/post");
+        res.redirect("/character");
     });
 });
 //delete
 router.delete("/:id", (req, res) => {
-    Post.findByIdAndRemove(req.params.id, (err, post) => {
-        res.redirect("/post");
+    Character.findByIdAndRemove(req.params.id, (err, character) => {
+        res.redirect("/character");
     });
 });
 
