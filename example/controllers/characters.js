@@ -19,28 +19,19 @@ router.get("/new", (req, res) => {
 });
 
 //create
-
-router.post("/", (req, res) => {
-    const currentUser = req.user;
-    if (currentUser === null) {
-        return res.redirect("/user/login");
-    }
+// CREATE
+  app.post('/', (req, res) => {
+    // INSTANTIATE INSTANCE OF POST MODEL
     var post = new Post(req.body);
-    post.author = req.user._id;
-    post.save()
-        .then(post => {
-            return User.findById(req.user._id);
-        })
-        .then(user => {
-            user.posts.unshift(post);
-            user.save();
-            // REDIRECT TO THE NEW POST
-            res.redirect("/post/" + post._id);
-        })
-        .catch(err => {
-            console.log(err.message);
-        });
-});
+
+    // SAVE INSTANCE OF POST MODEL TO DB
+    post.save((err, post) => {
+      // REDIRECT TO THE ROOT
+      return res.redirect(`/`);
+    })
+  });
+
+};
 //show
 router.get("/:id", (req, res) => {
     const currentUser = req.user;
