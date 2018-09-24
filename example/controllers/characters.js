@@ -4,9 +4,9 @@ const Character = require("../models/character.js");
 
 //index;
 router.get("/", (req, res) => {
-    Post.find({})
-        .then(post => {
-            res.render("posts/index.hbs", { post, currentUser });
+    Character.find({})
+        .then(character => {
+            res.render("posts/index.hbs", { character });
         })
         .catch(err => {
             console.log(err.message);
