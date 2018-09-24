@@ -25,6 +25,9 @@ app.use(express.static("public"));
 app.engine("hbs", hbs({ defaultLayout: "main", extname: "hbs" }));
 app.set("view engine", "hbs");
 
+const charactersController = require("./controllers/characters.js");
+app.use("/characters", charactersController);
+
 //index page
 app.get("/", (req, res) => {
     res.send("its monday bitch");
