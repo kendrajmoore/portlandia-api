@@ -1,0 +1,21 @@
+{{> header}}
+  {{> nav}}
+      <h1>New Episode</h1>
+       <div style="width: 30%; margin: 25px auto;">
+      <form action="/post/" method="POST">
+          <div class="form-group">
+              <label for="title">Title</label><br>
+              <input type="text" name="title" placeholder="Title" /><br/>
+          </div>
+          <div class="form-group">
+              <label for="summary">Summary</label>
+               <textarea name="summary" class="form-control" id="post-summary" placeholder="Summary"></textarea><br/>
+          </div>
+          <div class="form-group">
+              <label for="image">Image</label><br>
+              <input type="text" name="image" placeholder="Image" />
+          </div>
+          <button type="submit" class="orange">Send</button>
+
+      </form>
+  </div>

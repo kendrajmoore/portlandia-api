@@ -32,9 +32,9 @@ app.engine("hbs", hbs({ defaultLayout: "main", extname: "hbs" }));
 app.set("view engine", "hbs");
 
 const usersController = require("./controllers/users.js");
-app.use("/user", usersController);
+app.use("/portlandia/user", usersController);
 const episodeController = require("./controllers/episodes.js");
-app.use("/episode", usersController);
+app.use("/portlandia/episode", episodeController);
 
 // Mongoose Connection
 const mongoUri =
@@ -46,6 +46,11 @@ mongoose.connect(
 
 app.get("/", (req, res) => {
     res.send("i love puppies");
+});
+
+//404 page
+app.get("*", (req, res) => {
+    res.render("error/index.hbs");
 });
 
 app.listen(port, () => {

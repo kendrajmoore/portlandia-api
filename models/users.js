@@ -10,13 +10,6 @@ const UserSchema = new Schema({
 
 // Must use function here! ES6 => functions do not bind this!
 UserSchema.pre("save", function(next) {
-    // SET createdAt AND updatedAt
-    const now = new Date();
-    this.updatedAt = now;
-    if (!this.createdAt) {
-        this.createdAt = now;
-    }
-
     // ENCRYPT PASSWORD
     const user = this;
     if (!user.isModified("password")) {
