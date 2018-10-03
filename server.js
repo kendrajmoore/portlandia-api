@@ -33,6 +33,8 @@ app.set("view engine", "hbs");
 
 const usersController = require("./controllers/users.js");
 app.use("/user", usersController);
+const episodeController = require("./controllers/episodes.js");
+app.use("/episode", usersController);
 
 // Mongoose Connection
 const mongoUri =
