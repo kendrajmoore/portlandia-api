@@ -5,7 +5,7 @@ const User = require("../models/users.js");
 const bcrypt = require("bcrypt");
 
 router.get("/signup", (req, res) => {
-    res.send("sign up");
+    res.render("users/signup.hbs");
 });
 
 router.post("/signup", (req, res) => {
@@ -33,7 +33,7 @@ router.post("/signup", (req, res) => {
 
 // LOGIN FORM
 router.get("/login", (req, res) => {
-    res.send("login");
+    res.render("users/login.hbs");
 });
 
 // LOGIN

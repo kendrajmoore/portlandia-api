@@ -45,7 +45,7 @@ mongoose.connect(
 );
 
 app.get("/", (req, res) => {
-    res.send("i love puppies");
+    res.send("portlandia home page");
 });
 
 //404 page
