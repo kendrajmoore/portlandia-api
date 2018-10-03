@@ -39,6 +39,10 @@ mongoose.connect(
     { useNewUrlParser: true }
 );
 
+app.get("/", (req, res) => {
+    res.send("i love puppies");
+});
+
 app.listen(port, () => {
     console.log("listening");
 });
