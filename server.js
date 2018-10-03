@@ -31,6 +31,9 @@ app.use(morgan("combined"));
 app.engine("hbs", hbs({ defaultLayout: "main", extname: "hbs" }));
 app.set("view engine", "hbs");
 
+const usersController = require("./controllers/users.js");
+app.use("/user", usersController);
+
 // Mongoose Connection
 const mongoUri =
     process.env.MONGODB_URI || "mongodb://localhost:27017/portlandia";
