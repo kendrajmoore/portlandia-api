@@ -1,8 +1,13 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const app = express();
+const bodyParser = require("body-parser");
 const hbs = require("express-handlebars");
 const methodOverride = require("method-override");
+const morgan = require("morgan");
+const bcrypt = require("bcrypt");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+const expressValidator = require("express-validator");
 
 // Port
 const port = process.env.PORT || 3000;
@@ -15,8 +20,12 @@ app.use(methodOverride("_method"));
 // Use Body Parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(morgan("dev"));
 // static files middleware
+app.use(expressValidator());
+app.use(cookieParser());
 app.use(express.static("public"));
+app.use(morgan("combined"));
 
 // Set the view engine and file extension
 app.engine("hbs", hbs({ defaultLayout: "main", extname: "hbs" }));
