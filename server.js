@@ -9,12 +9,11 @@ const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const expressValidator = require("express-validator");
+//SET UP MONGOOSE
+const mongoose = require("./config/database");
 
 // Port
 const port = process.env.PORT || 3000;
-
-//SET UP MONGOOSE
-const mongoose = require("mongoose");
 
 //middleware
 app.use(methodOverride("_method"));
@@ -26,7 +25,6 @@ app.use(morgan("dev"));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static("public"));
-app.use(morgan("combined"));
 
 // Set the view engine and file extension
 app.engine("hbs", hbs({ defaultLayout: "main", extname: "hbs" }));
@@ -37,12 +35,10 @@ app.use("/portlandia/user", usersController);
 const episodeController = require("./controllers/episodes.js");
 app.use("/portlandia/episode", episodeController);
 
-// Mongoose Connection
-const mongoUri =
-    process.env.MONGODB_URI || "mongodb://localhost:27017/portlandia";
-mongoose.connect(
-    mongoUri,
-    { useNewUrlParser: true }
+// connection to mongodb
+mongoose.connection.on(
+    "error",
+    console.error.bind(console, "MongoDB connection error:")
 );
 
 //USER AUTH
