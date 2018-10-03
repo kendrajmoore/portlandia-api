@@ -45,6 +45,23 @@ mongoose.connect(
     { useNewUrlParser: true }
 );
 
+//USER AUTH
+const checkauth = (req, res, next) => {
+    if (
+        typeof req.cookies.nToken === "undefined" ||
+        req.cookies.nToken === null
+    ) {
+        req.user = null;
+    } else {
+        const token = req.cookies.nToken;
+
+        const decodedToken = jwt.decode(token, { complete: true }) || {};
+        req.user = decodedToken.payload; // {  _id, username }
+    }
+    next();
+};
+app.use(checkauth);
+
 app.get("/", (req, res) => {
     res.send("portlandia home page");
 });
