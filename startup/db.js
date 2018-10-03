@@ -1,8 +1,10 @@
-const winston = require("winston");
 const mongoose = require("mongoose");
-const config = require("config");
+// Mongoose Connection
+const mongoUri =
+    process.env.MONGODB_URI || "mongodb://localhost:27017/portlandia";
+mongoose.connect(
+    mongoUri,
+    { useNewUrlParser: true }
+);
 
-module.exports = () => {
-    const db = config.get("db");
-    mongoose.connect(db).then(() => winston.info(`Connected to ${db}...`));
-};
+module.exports = mongoose;

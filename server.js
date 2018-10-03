@@ -10,11 +10,10 @@ const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const expressValidator = require("express-validator");
 //SET UP MONGOOSE
-const mongoose = require("./config/database");
+const mongoose = require("./startup/db");
 
 // Port
 const port = process.env.PORT || 3000;
-
 //middleware
 app.use(methodOverride("_method"));
 // Use Body Parser
@@ -30,10 +29,11 @@ app.use(express.static("public"));
 app.engine("hbs", hbs({ defaultLayout: "main", extname: "hbs" }));
 app.set("view engine", "hbs");
 
-const usersController = require("./controllers/users.js");
-app.use("/portlandia/user", usersController);
-const episodeController = require("./controllers/episodes.js");
-app.use("/portlandia/episode", episodeController);
+const logging = require("./startup/logging");
+require("./startup/cors")(app);
+require("./startup/routes")(app);
+const db = require("./startup/db");
+const validation = require("./startup/validation");
 
 // connection to mongodb
 mongoose.connection.on(
@@ -59,7 +59,7 @@ const checkauth = (req, res, next) => {
 app.use(checkauth);
 
 app.get("/", (req, res) => {
-    res.send("portlandia home page");
+    res.render("homepage.hbs");
 });
 
 //404 page
