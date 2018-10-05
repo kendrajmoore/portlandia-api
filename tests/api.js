@@ -7,6 +7,7 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
+const agent = chai.request.agent(server);
 // const { site, message } = require("../helpers");
 
 describe("Generic API", () => {

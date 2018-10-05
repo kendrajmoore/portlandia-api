@@ -5,6 +5,10 @@ const should = chai.should()
 
 chai.use(chaiHttp)
 
+const agent = chai.request.agent(server);
+
+const Character = require("../models/characters");
+
 // const { message } = require('../helpers')
 
 describe('Character Endpoints', () => {
@@ -124,3 +128,4 @@ describe('Character Endpoints', () => {
           done()
         })
     })
+})

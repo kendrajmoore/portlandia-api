@@ -5,6 +5,10 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
+const agent = chai.request.agent(server);
+
+const Episode = require("../models/episodes");
+
 // const { message } = require("../helpers");
 
 describe("Episode Endpoints", () => {

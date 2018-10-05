@@ -6,7 +6,7 @@ chai.use(chaiHttp);
 
 const agent = chai.request.agent(server);
 
-const User = require("../models/user");
+const User = require("../models/users");
 
 describe("User", function() {});
 // signup
