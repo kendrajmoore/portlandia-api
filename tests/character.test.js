@@ -26,6 +26,7 @@ describe('Character Endpoints', () => {
           done()
         })
     })
+})
 
 
   describe('/GET Single character with id: 1', () => {
