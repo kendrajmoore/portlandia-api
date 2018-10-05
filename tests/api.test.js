@@ -14,7 +14,7 @@ describe("Generic API", () => {
     describe("Endpoints list", () => {
         it("should GET a list of endpoints", done => {
             chai.request(server)
-                .get("/portlania")
+                .get("/portlandia")
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a("object");
@@ -24,28 +24,6 @@ describe("Generic API", () => {
                     res.body.should.have
                         .property("episodes")
                         .include("/portlandia/episode");
-                    done();
-                });
-        });
-    });
-
-    describe("Info Object", () => {
-        it("should GET an Info object with determinated keys", done => {
-            chai.request(server)
-                .get("/api/character")
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.info.should.be.a("object");
-                    Object.keys(res.body.info).should.be.eql([
-                        "count",
-                        "pages",
-                        "next",
-                        "prev"
-                    ]);
-                    res.body.info.count.should.be.a("number");
-                    res.body.info.pages.should.be.a("number");
-                    res.body.info.next.should.be.a("string");
-                    res.body.info.prev.should.be.a("string");
                     done();
                 });
         });
