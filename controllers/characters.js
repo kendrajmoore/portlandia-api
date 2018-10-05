@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Episode = require("../models/episodes.js");
+const Character = require("../models/characters.js");
 // const User = require("../models/user.js");
 //index;
 router.get("/", (req, res) => {
@@ -8,9 +8,9 @@ router.get("/", (req, res) => {
     // if (currentUser === null) {
     //     return res.redirect("/user/login");
     // }
-    Episode.find({})
-        .then(episode => {
-            res.send("indexpost", { episode });
+    Character.find({})
+        .then(character => {
+            res.send("indexpost", { character });
         })
         .catch(err => {
             console.log(err.message);
@@ -36,11 +36,11 @@ router.get("/new", (req, res) => {
 //show
 router.get("/:id", (req, res) => {
     // const currentUser = req.user;
-    Episode.findById(req.params.id)
+    Character.findById(req.params.id)
         // .populate("comments")
-        .then(episode => {
+        .then(character => {
             res.send("show", {
-                post
+                character
             }).catch(err => {
                 console.log(err.message);
             });
@@ -49,22 +49,22 @@ router.get("/:id", (req, res) => {
 
 //Edit
 router.get("/:id/edit", (req, res) => {
-    Episode.findById(req.params.id, (err, episode) => {
+    Character.findById(req.params.id, (err, character) => {
         res.send("edit", {
-            post
+            character
         });
     });
 });
 
 router.put("/:id", (req, res) => {
-    Episode.findByIdAndUpdate(req.params.id, req.body, (err, episode) => {
+    Character.findByIdAndUpdate(req.params.id, req.body, (err, character) => {
         console.log(err);
         res.redirect("/");
     });
 });
 //delete
 router.delete("/:id", (req, res) => {
-    Episode.findByIdAndRemove(req.params.id, (err, episode) => {
+    Character.findByIdAndRemove(req.params.id, (err, character) => {
         res.redirect("/");
     });
 });
