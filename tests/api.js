@@ -1,4 +1,4 @@
-process.env.NODE_ENV = "test";
+// process.env.NODE_ENV = "test";
 
 const chai = require("chai");
 const chaiHttp = require("chai-http");
@@ -7,25 +7,22 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-const { site, message } = require("../helpers");
+// const { site, message } = require("../helpers");
 
 describe("Generic API", () => {
     describe("Endpoints list", () => {
         it("should GET a list of endpoints", done => {
             chai.request(server)
-                .get("/api")
+                .get("/portlania")
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a("object");
                     res.body.should.have
                         .property("characters")
-                        .include(`${site}/character`);
-                    res.body.should.have
-                        .property("locations")
-                        .include(`${site}/location`);
+                        .include("/portlandia/character");
                     res.body.should.have
                         .property("episodes")
-                        .include(`${site}/episode`);
+                        .include("/portlandia/episode");
                     done();
                 });
         });
@@ -56,7 +53,7 @@ describe("Generic API", () => {
     describe("API 404", () => {
         it("should get an error message", done => {
             chai.request(server)
-                .get("/api/wubbalubbadubdub")
+                .get("/portlandia/ifc")
                 .end((err, res) => {
                     res.should.have.status(404);
                     res.body.should.be.a("object");
@@ -67,17 +64,3 @@ describe("Generic API", () => {
                 });
         });
     });
-
-    describe("Avatar redirect", () => {
-        it("should redirect to /character", done => {
-            chai.request(server)
-                .get("/api/character/avatar")
-                .end((err, res) => {
-                    res.should.redirect;
-                    res.should.have.status(200);
-                    res.req.path.should.be.eql("/api/character/");
-                    done();
-                });
-        });
-    });
-});

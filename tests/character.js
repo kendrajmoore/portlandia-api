@@ -5,14 +5,14 @@ const should = chai.should()
 
 chai.use(chaiHttp)
 
-const { message } = require('../helpers')
+// const { message } = require('../helpers')
 
 describe('Character Endpoints', () => {
 
   describe('/GET All characters', () => {
     it('should get all characters', done => {
       chai.request(server)
-        .get('/api/character')
+        .get('/portlandia/character')
         .end((err, res) => {
           res.should.have.status(200)
           res.body.should.be.a('object')
