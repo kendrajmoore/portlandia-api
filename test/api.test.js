@@ -28,18 +28,17 @@ describe("Generic API", () => {
                 });
         });
     });
+});
 
-    describe("API 404", () => {
-        it("should get an error message", done => {
-            chai.request(server)
-                .get("/portlandia/ifc")
-                .end((err, res) => {
-                    res.should.have.status(404);
-                    res.body.should.be.a("object");
-                    res.body.should.have
-                        .property("error")
-                        .include(message.noPage);
-                    done();
-                });
-        });
+describe("API 404", () => {
+    it("should get an error message", done => {
+        chai.request(server)
+            .get("/portlandia/ifc")
+            .end((err, res) => {
+                res.should.have.status(404);
+                res.body.should.be.a("object");
+                res.body.should.have.property("error").include(message.noPage);
+                done();
+            });
     });
+});

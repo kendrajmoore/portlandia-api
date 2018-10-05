@@ -25,6 +25,7 @@ describe("Episode Endpoints", () => {
                     done();
                 });
         });
+    });
 
     describe("/GET Single episode with id: 1", () => {
         it("should get one episode with id: 1", done => {
@@ -53,7 +54,6 @@ describe("Episode Endpoints", () => {
                 });
         });
     });
-
 
     describe("/GET Error messages", () => {
         it("should get an error message with id:12345", done => {
@@ -121,3 +121,4 @@ describe("Episode Endpoints", () => {
                 });
         });
     });
+});
