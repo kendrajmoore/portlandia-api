@@ -65,6 +65,7 @@ app.get("/", (req, res) => {
 //404 page
 app.get("*", (req, res) => {
     res.render("error/index.hbs");
+    return res.status(404);
 });
 
 app.listen(port, () => {

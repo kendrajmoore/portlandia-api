@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const Character = require("../models/characters.js");
-// const User = require("../models/user.js");
+const User = require("../models/users.js");
 //index;
 router.get("/", (req, res) => {
-    // const currentUser = req.user;
-    // if (currentUser === null) {
-    //     return res.redirect("/user/login");
-    // }
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     Character.find({})
-        .then(character => {
-            res.send("indexpost", { character });
+        .then(episode => {
+            res.status(200).json({ character, currentUser });
         })
         .catch(err => {
             console.log(err.message);
@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
 
 //new
 router.get("/new", (req, res) => {
-    res.send("new");
+    res.render("characters/new.hbs");
 });
 
 //create

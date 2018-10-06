@@ -1,0 +1,22 @@
+
+          {{> header}}
+            {{> nav}}
+                <h1>New Character</h1>
+                 <div style="width: 30%; margin: 25px auto;">
+                <form action="/portlandia/character/new" method="POST">
+                    <div class="form-group">
+                        <label for="Name">Name</label><br>
+                        <input type="text" name="name" placeholder="name" /><br/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Episode Appearances">Episodes</label><br>
+                        <input type="text" name="episodes" placeholder="episodes" /><br/>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image</label><br>
+                        <input type="text" name="image" placeholder="Image" />
+                    </div>
+                    <button type="submit" class="orange">Send</button>
+
+                </form>
+            </div>

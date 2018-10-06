@@ -1,25 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const Episode = require("../models/episodes.js");
-// const User = require("../models/user.js");
+const User = require("../models/users.js");
 //index;
 router.get("/", (req, res) => {
-    // const currentUser = req.user;
-    // if (currentUser === null) {
-    //     return res.redirect("/user/login");
-    // }
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     Episode.find({})
         .then(episode => {
-            res.send("indexpost", { episode });
+            res.status(200).json({ episode, currentUser });
         })
         .catch(err => {
             console.log(err.message);
         });
 });
-
 //new
 router.get("/new", (req, res) => {
-    res.send("new");
+    res.render("episodes/new.hbs");
 });
 
 //create

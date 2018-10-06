@@ -17,13 +17,6 @@ describe("Generic API", () => {
                 .get("/portlandia")
                 .end((err, res) => {
                     res.should.have.status(200);
-                    res.body.should.be.a("object");
-                    res.body.should.have
-                        .property("characters")
-                        .include("/portlandia/character");
-                    res.body.should.have
-                        .property("episodes")
-                        .include("/portlandia/episode");
                     done();
                 });
         });
@@ -36,8 +29,6 @@ describe("API 404", () => {
             .get("/portlandia/ifc")
             .end((err, res) => {
                 res.should.have.status(404);
-                res.body.should.be.a("object");
-                res.body.should.have.property("error").include(message.noPage);
                 done();
             });
     });
