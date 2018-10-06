@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const CharacterSchema = new Schema({
     image: String,
     name: String,
-    episodes: [{ type: Schema.Types.ObjectId, ref: "Episode" }]
+    episodes: [String]
 });
 
 module.exports = mongoose.model("Character", CharacterSchema);
