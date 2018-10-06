@@ -61,6 +61,7 @@ router.post("/login", (req, res) => {
                 );
                 // Set a cookie and redirect to root
                 res.cookie("nToken", token, { maxAge: 900000, httpOnly: true });
+                res.status(200);
                 res.redirect("/");
             });
         })

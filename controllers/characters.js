@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Character = require("../models/characters.js");
-const User = require("../models/users.js");
+const Character = require("../models/characters");
+const User = require("../models/users");
 //index;
 router.get("/", (req, res) => {
     const currentUser = req.user;
@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
         return res.redirect("/portlandia/user/login");
     }
     Character.find({})
-        .then(episode => {
+        .then(character => {
             res.status(200).json({ character, currentUser });
         })
         .catch(err => {

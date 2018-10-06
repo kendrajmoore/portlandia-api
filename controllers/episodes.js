@@ -39,7 +39,7 @@ router.get("/:id", (req, res) => {
         // .populate("comments")
         .then(episode => {
             res.send("show", {
-                post
+                episode
             }).catch(err => {
                 console.log(err.message);
             });
