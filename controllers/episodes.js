@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const Episode = require("../models/episodes.js");
-const User = require("../models/users.js");
+// const User = require("../models/users.js");
 //index;
 router.get("/", (req, res) => {
-    const currentUser = req.user;
-    if (currentUser === null) {
-        return res.redirect("/portlandia/user/login");
-    }
+    // const currentUser = req.user;
+    // if (currentUser === null) {
+    //     return res.redirect("/portlandia/user/login");
+    // }
     Episode.find({})
         .then(episode => {
-            res.status(200).json({ episode, currentUser });
+            res.status(200).send({ episode, message: "Get all episodes" });
         })
         .catch(err => {
             console.log(err.message);
@@ -18,27 +18,28 @@ router.get("/", (req, res) => {
 });
 //new
 router.get("/new", (req, res) => {
-    res.render("episodes/new.hbs");
+    res.status(200).render("episodes/new.hbs");
 });
 
 //create
 
-// router
-//     .post("/", (req, res) => {
-//         const episode = new Episode(req.body);
-//         post.save();
-//         res.redirect("/");
-//     })
-//     .catch(err => {
-//         console.log(err.message);
-//     });
+router.post("/", (req, res) => {
+    Episode.create(req.body, (err, episode) => {
+        res.json({
+            episode
+        }).catch(err => {
+            console.log(err.message);
+        });
+    });
+});
+
 //show
 router.get("/:id", (req, res) => {
     // const currentUser = req.user;
     Episode.findById(req.params.id)
         // .populate("comments")
         .then(episode => {
-            res.send("show", {
+            res.json("show", {
                 episode
             }).catch(err => {
                 console.log(err.message);
@@ -50,7 +51,7 @@ router.get("/:id", (req, res) => {
 router.get("/:id/edit", (req, res) => {
     Episode.findById(req.params.id, (err, episode) => {
         res.send("edit", {
-            post
+            episode
         });
     });
 });

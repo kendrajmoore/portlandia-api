@@ -5,7 +5,7 @@ const User = require("../models/users.js");
 const bcrypt = require("bcrypt");
 
 router.get("/signup", (req, res) => {
-    res.render("users/signup.hbs");
+    res.status(200).render("users/signup.hbs");
 });
 
 router.post("/signup", (req, res) => {
@@ -27,13 +27,13 @@ router.post("/signup", (req, res) => {
             maxAge: 900000,
             httpOnly: true
         });
-        res.redirect("/");
+        res.status(200).redirect("/");
     });
 });
 
 // LOGIN FORM
 router.get("/login", (req, res) => {
-    res.render("users/login.hbs");
+    res.status(200).render("users/login.hbs");
 });
 
 // LOGIN
@@ -61,8 +61,7 @@ router.post("/login", (req, res) => {
                 );
                 // Set a cookie and redirect to root
                 res.cookie("nToken", token, { maxAge: 900000, httpOnly: true });
-                res.status(200);
-                res.redirect("/");
+                res.status(200).redirect("/");
             });
         })
         .catch(err => {
@@ -72,7 +71,7 @@ router.post("/login", (req, res) => {
 
 router.get("/logout", (req, res) => {
     res.clearCookie("nToken");
-    res.redirect("/");
+    res.status(200).redirect("/");
 });
 
 module.exports = router;

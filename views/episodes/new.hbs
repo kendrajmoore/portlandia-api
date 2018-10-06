@@ -2,7 +2,7 @@
   {{> nav}}
       <h1>New Episode</h1>
        <div style="width: 30%; margin: 25px auto;">
-      <form action="/post/" method="POST">
+      <form action="/portlandia/episode" method="POST">
           <div class="form-group">
               <label for="title">Title</label><br>
               <input type="text" name="title" placeholder="Title" /><br/>
@@ -15,7 +15,7 @@
               <label for="image">Image</label><br>
               <input type="text" name="image" placeholder="Image" />
           </div>
-          <button type="submit" class="orange">Send</button>
+        <input class="btn btn-primary" type="submit" value="Add" />
 
       </form>
   </div>
