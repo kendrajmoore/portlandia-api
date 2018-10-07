@@ -29,12 +29,6 @@ app.use(express.static("public"));
 app.engine("hbs", hbs({ defaultLayout: "main", extname: "hbs" }));
 app.set("view engine", "hbs");
 
-const logging = require("./startup/logging");
-require("./startup/cors")(app);
-require("./startup/routes")(app);
-const db = require("./startup/db");
-const validation = require("./startup/validation");
-
 // connection to mongodb
 mongoose.connection.on(
     "error",
@@ -57,6 +51,12 @@ const checkauth = (req, res, next) => {
     next();
 };
 app.use(checkauth);
+
+const logging = require("./startup/logging");
+require("./startup/cors")(app);
+require("./startup/routes")(app);
+// const db = require("./startup/db");
+const validation = require("./startup/validation");
 
 app.get("/", (req, res) => {
     res.render("homepage.hbs");

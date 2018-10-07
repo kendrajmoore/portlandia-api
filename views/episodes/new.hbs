@@ -1,11 +1,24 @@
 {{> header}}
   {{> nav}}
+
       <h1>New Episode</h1>
        <div style="width: 30%; margin: 25px auto;">
       <form action="/portlandia/episode" method="POST">
           <div class="form-group">
               <label for="title">Title</label><br>
               <input type="text" name="title" placeholder="Title" /><br/>
+          </div>
+          <div class="form-group">
+              <label for="title">Season</label><br>
+              <input type="number" name="season" placeholder="season" /><br/>
+          </div>
+          <div class="form-group">
+              <label for="number">Episode Number</label><br>
+              <input type="number" name="number" placeholder="episode number" /><br/>
+          </div>
+          <div class="form-group">
+              <label for="date">Original Air Date</label><br>
+              <input type="date" name="date" placeholder="date" /><br/>
           </div>
           <div class="form-group">
               <label for="summary">Summary</label>
