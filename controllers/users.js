@@ -15,7 +15,9 @@ router.get("/signup", (req, res) => {
 router.post("/signup", (req, res) => {
     // Create User and JWT
     const user = new User(req.body);
-
+    if (req.body.adminCode === process.env.ADMIN_CODE) {
+        newUser.isAdmin = true;
+    }
     user.save().then(user => {
         const token = jwt.sign(
             {

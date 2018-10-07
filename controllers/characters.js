@@ -19,6 +19,10 @@ router.get("/", (req, res) => {
 
 //new
 router.get("/new", (req, res) => {
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     res.status(200).render("characters/new.hbs");
 });
 
@@ -38,7 +42,10 @@ router.post("/", (req, res) => {
 });
 //show
 router.get("/:id", (req, res) => {
-    // const currentUser = req.user;
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     Character.findById(req.params.id)
         // .populate("comments")
         .then(character => {
@@ -55,6 +62,10 @@ router.get("/:id", (req, res) => {
 
 //Edit
 router.get("/:id/edit", (req, res) => {
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     Character.findById(req.params.id, (err, character) => {
         res.render("character/edit.hbs", {
             character
@@ -65,6 +76,10 @@ router.get("/:id/edit", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     Character.findByIdAndUpdate(req.params.id, req.body, (err, character) => {
         res.status(200).redirect("/");
     }).catch(err => {
@@ -73,6 +88,10 @@ router.put("/:id", (req, res) => {
 });
 //delete
 router.delete("/:id", (req, res) => {
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     Character.findByIdAndRemove(req.params.id, (err, character) => {
         res.status(200).redirect("/");
     }).catch(err => {

@@ -18,6 +18,10 @@ router.get("/", (req, res) => {
 });
 //new
 router.get("/new", (req, res) => {
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     res.status(200).render("episodes/new.hbs");
 });
 
@@ -38,6 +42,10 @@ router.post("/", (req, res) => {
 
 //show
 router.get("/:id", (req, res) => {
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     Episode.findById(req.params.id).then(episode => {
         res.status(200)
             .json({
@@ -52,6 +60,10 @@ router.get("/:id", (req, res) => {
 
 //Edit
 router.get("/:id/edit", (req, res) => {
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     Episode.findById(req.params.id, (err, episode) => {
         res.status(200)
             .render("episodes/edit.hbs", {
@@ -64,6 +76,10 @@ router.get("/:id/edit", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     Episode.findByIdAndUpdate(req.params.id, req.body, (err, episode) => {
         res.status(200).redirect("/");
     }).catch(err => {
@@ -72,6 +88,10 @@ router.put("/:id", (req, res) => {
 });
 //delete
 router.delete("/:id", (req, res) => {
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     Episode.findByIdAndRemove(req.params.id, (err, episode) => {
         res.status(200).redirect("/");
     }).catch(err => {
