@@ -3,6 +3,10 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/users.js");
 const bcrypt = require("bcrypt");
+//
+// router.get("/", (req, res) => {
+//     res.render("homepage.hbs");
+// });
 
 router.get("/signup", (req, res) => {
     res.status(200).render("users/signup.hbs");

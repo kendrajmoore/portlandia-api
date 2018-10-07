@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const Character = require("../models/characters");
-// const User = require("../models/users");
+const User = require("../models/users");
 //index;
 router.get("/", (req, res) => {
-    // const currentUser = req.user;
-    // if (currentUser === null) {
-    //     return res.redirect("/portlandia/user/login");
-    // }
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     Character.find({})
         .then(character => {
             res.status(200).json({ character, message: "Get all characters" });

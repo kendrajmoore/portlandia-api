@@ -4,10 +4,10 @@ const Episode = require("../models/episodes");
 // const User = require("../models/users.js");
 //index;
 router.get("/", (req, res) => {
-    // const currentUser = req.user;
-    // if (currentUser === null) {
-    //     return res.redirect("/portlandia/user/login");
-    // }
+    const currentUser = req.user;
+    if (currentUser === null) {
+        return res.redirect("/portlandia/user/login");
+    }
     Episode.find({})
         .then(episode => {
             res.status(200).json({ episode, message: "Get all episodes" });
