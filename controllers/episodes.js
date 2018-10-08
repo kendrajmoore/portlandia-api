@@ -67,16 +67,8 @@ router.get("/:id", (req, res) => {
 
 //Edit
 router.get("/:id/edit", (req, res) => {
-    const currentUser = req.user;
-    if (currentUser === null) {
-        return res.redirect("/portlandia/user/login");
-    }
     Episode.findById(req.params.id, (err, episode) => {
-        res.render("episodes/edit.hbs", {
-            episode
-        }).catch(err => {
-            console.log(err);
-        });
+        res.render("episodes/edit.hbs", { episode });
     });
 });
 
