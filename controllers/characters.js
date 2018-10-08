@@ -29,15 +29,11 @@ router.get("/new", (req, res) => {
 //create
 
 router.post("/", (req, res) => {
-    Character.create(req.body, (err, character) => {
-        res.status(200)
-            .json({
-                episode,
-                message: "You have submitted a new character"
-            })
-            .catch(err => {
-                console.log(err.message);
-            });
+    const character = new Character(req.body);
+    character.save();
+    res.status(200).json({
+        character,
+        message: "You have submitted a new character"
     });
 });
 //show

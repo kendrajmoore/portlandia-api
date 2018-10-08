@@ -28,17 +28,24 @@ router.get("/new", (req, res) => {
 //create
 
 router.post("/", (req, res) => {
-    Episode.create(req.body, (err, episode) => {
-        res.status(200)
-            .json({
-                episode,
-                message: "You have submitted a new episode"
-            })
-            .catch(err => {
-                console.log(err.message);
-            });
+    const episode = new Episode(req.body);
+    episode.save();
+    res.status(200).json({
+        episode,
+        message: "You have submitted a new episode"
     });
 });
+//     Episode.create(req.body, (err, episode) => {
+//         res.status(200)
+//             .json({
+//                 episode,
+//                 message: "You have submitted a new episode"
+//             })
+//             .catch(err => {
+//                 console.log(err.message);
+//             });
+//     });
+// });
 
 //show
 router.get("/:id", (req, res) => {
@@ -65,13 +72,11 @@ router.get("/:id/edit", (req, res) => {
         return res.redirect("/portlandia/user/login");
     }
     Episode.findById(req.params.id, (err, episode) => {
-        res.status(200)
-            .render("episodes/edit.hbs", {
-                episode
-            })
-            .catch(err => {
-                console.log(err.message);
-            });
+        res.render("episodes/edit.hbs", {
+            episode
+        }).catch(err => {
+            console.log(err);
+        });
     });
 });
 
