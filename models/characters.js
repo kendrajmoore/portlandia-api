@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-var id = new mongoose.Types.ObjectId();
+// var id = new mongoose.Types.ObjectId();
 
 const CharacterSchema = new Schema({
     image: String,
